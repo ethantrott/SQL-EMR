@@ -6,8 +6,7 @@ const { Client } = require('pg');
 
 const config = require("./config.json");
 
-const insert_data = require("./insert_data");
-const get_data = require("./get_data");
+const tests = require("./tests");
 
 const client = new Client({
     host: config.host,
@@ -26,8 +25,8 @@ async function main(){
     console.log("Setup complete.");
 
     // test insert and get
-    await insert_data.insert_patient(client, 5432174, "John Doe", '1986-02-05');
-    console.log(await get_data.get_patients_by_name(client, "John Doe"));
+    await tests.doTests(client);
+    console.log("Tests complete.")
 
     // exit
     await client.end(); 
@@ -43,8 +42,16 @@ async function setup(){
 
     // Create required tables
     await client.query(`CREATE TABLE patients (mrn INT PRIMARY KEY, name TEXT, dob DATE)`);
-    await client.query(`CREATE TABLE interactions (fin INT PRIMARY KEY, mrn INT FOREIGN KEY, type interaction_type, note TEXT)`);
-    await client.query(`CREATE TABLE orders (order_id INT PRIMARY KEY, fin INT FOREIGN KEY, order_name TEXT, quantity FLOAT)`);
+    await client.query(`CREATE TABLE interactions (fin INT PRIMARY KEY, mrn INT, type interaction_type, note TEXT, 
+        CONSTRAINT fk_patient_mrn
+            FOREIGN KEY(mrn) 
+            REFERENCES patients(mrn)
+            ON DELETE CASCADE)`);
+    await client.query(`CREATE TABLE orders (order_id INT PRIMARY KEY, fin INT, order_name TEXT, quantity FLOAT,
+        CONSTRAINT fk_interaction_fin
+            FOREIGN KEY(fin) 
+            REFERENCES interactions(fin)
+            ON DELETE CASCADE)`);
 
     // Output table list
     const res = await client.query(`SELECT table_name FROM information_schema.tables WHERE table_schema='public'`);
