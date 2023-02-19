@@ -1,3 +1,7 @@
+// Ethan Trott
+// SQL EMR
+// 2023
+
 const prompt = require("prompt-sync")({ sigint: true });
 
 const insert_data = require("./insert_data");

@@ -1,3 +1,7 @@
+// Ethan Trott
+// SQL EMR
+// 2023
+
 const insert_data = require("./insert_data");
 const get_data = require("./get_data");
 
