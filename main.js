@@ -43,8 +43,8 @@ async function setup(){
 
     // Create required tables
     await client.query(`CREATE TABLE patients (mrn INT PRIMARY KEY, name TEXT, dob DATE)`);
-    await client.query(`CREATE TABLE interactions (fin INT PRIMARY KEY, mrn INT, type interaction_type, note TEXT)`);
-    await client.query(`CREATE TABLE orders (order_id INT PRIMARY KEY, fin INT, order_name TEXT, quantity FLOAT)`);
+    await client.query(`CREATE TABLE interactions (fin INT PRIMARY KEY, mrn INT FOREIGN KEY, type interaction_type, note TEXT)`);
+    await client.query(`CREATE TABLE orders (order_id INT PRIMARY KEY, fin INT FOREIGN KEY, order_name TEXT, quantity FLOAT)`);
 
     // Output table list
     const res = await client.query(`SELECT table_name FROM information_schema.tables WHERE table_schema='public'`);
