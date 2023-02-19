@@ -1,8 +1,4 @@
 # SQL-EMR
-### Ethan Trott
-
-
-<br>
 
 Created as a proof-of-concept EMR implemented with SQL as the DB.
 
