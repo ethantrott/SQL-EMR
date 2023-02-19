@@ -98,7 +98,7 @@ async function viewPatientMenu(client){
     process.stdout.write('\033c');
 
     // get input and display correct submenu
-    console.log("SQL-EMR\nEthan Trott \n\nView Patient Record\n\n1) View All Patients\n2) View Patient by MRN\n3) View Patient by Name\n\nAny other key to return");
+    console.log("SQL-EMR\nEthan Trott \n\nView Patient Record\n\n1) View All Patients\n2) View Patient by MRN\n3) View Patient by Name\n4) View MRNs by Order Name \n\nAny other key to return");
     const choice = prompt("> ");
     if (choice == "1"){
         console.log(await get_data.get_all_patients(client));
@@ -112,6 +112,11 @@ async function viewPatientMenu(client){
     else if (choice == "3") {
         const name = prompt("Name: ");
         console.log(await get_data.get_patients_by_name(client, name));
+        prompt("Press any key to continue.");
+    }
+    else if (choice == "4") {
+        const name = prompt("Order Name: ");
+        console.log(await get_data.get_mrns_by_order_name(client, name));
         prompt("Press any key to continue.");
     }
 }
