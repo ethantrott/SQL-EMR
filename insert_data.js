@@ -4,7 +4,7 @@
 
 // (mrn INT, name TEXT, dob DATE)
 async function insert_patient(client, mrn, name, dob){
-    await client.query(`INSERT INTO patients VALUES ( ${mrn}, ${name}, ${dob} )`);
+    await client.query(`INSERT INTO patients VALUES ( ${mrn}, '${name}', '${dob}' )`);
 }
 
 // (fin INT, mrn INT, type interaction_type, note TEXT)
