@@ -7,6 +7,7 @@ const { Client } = require('pg');
 const config = require("./config.json");
 
 const tests = require("./tests");
+const user_interact = require("./user_interact");
 
 const client = new Client({
     host: config.host,
@@ -25,6 +26,8 @@ async function main(){
 
     // test insert and get
     await tests.doTests(client);
+
+    await user_interact.mainMenu(client);
 
     // exit
     await client.end(); 
