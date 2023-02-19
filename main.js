@@ -22,11 +22,9 @@ async function main(){
 
     // setup
     await setup();
-    console.log("Setup complete.");
 
     // test insert and get
     await tests.doTests(client);
-    console.log("Tests complete.")
 
     // exit
     await client.end(); 
@@ -57,6 +55,8 @@ async function setup(){
     const res = await client.query(`SELECT table_name FROM information_schema.tables WHERE table_schema='public'`);
     console.log("Tables created:");
     console.log(res.rows);
+
+    console.log("Setup complete.");
 }
 
 main();

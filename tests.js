@@ -30,6 +30,8 @@ async function doTests(client) {
     console.log(await get_data.get_orders_by_fin(client, 33248724));                 // returns both orders for the same interaction
     console.log(await get_data.get_orders_by_order_name(client, "ibuprofen"));       // returns both orders of the same order_name
     console.log(await get_data.get_mrns_by_order_name(client, "ibuprofen"));         // returns both patient mrns that have orders for ibuprofen
+
+    console.log("Tests complete.")
 }
 
 module.exports = {doTests};
