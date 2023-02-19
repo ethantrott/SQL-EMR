@@ -36,9 +36,49 @@ async function createPatientMenu(client){
     // get input and display correct submenu
     console.log("SQL-EMR\nEthan Trott \n\nCreate Patient Record\nType 'exit' to return\n\n");
     const mrn = prompt("MRN: ");
+    if (mrn === "exit") return;
     const name = prompt("Name: ");
+    if (name === "exit") return;
     const dob = prompt("Date of Birth (e.g. '1999-01-01'): ")
+    if (dob === "exit") return;
+
     await insert_data.insert_patient(client, mrn, name, dob);
+}
+
+async function createInteractionMenu(client){
+    // clear console
+    process.stdout.write('\033c');
+
+    // get input and display correct submenu
+    console.log("SQL-EMR\nEthan Trott \n\nCreate Interaction Record\nType 'exit' to return\n\n");
+    const fin = prompt("FIN: ");
+    if (fin === "exit") return;
+    const mrn = prompt("MRN: ");
+    if (mrn === "exit") return;
+    const type = prompt("Interaction Type ('routine', 'emergency', or 'other'): ")
+    if (type === "exit") return;
+    const note = prompt("Notes: ")
+    if (note === "exit") return;
+    
+    await insert_data.insert_interaction(client, fin, mrn, type, note);
+}
+
+async function createOrderMenu(client){
+    // clear console
+    process.stdout.write('\033c');
+
+    // get input and display correct submenu
+    console.log("SQL-EMR\nEthan Trott \n\nCreate Order Record\nType 'exit' to return\n\n");
+    const order_id = prompt("Order ID: ");
+    if (order_id === "exit") return;
+    const fin = prompt("FIN: ");
+    if (fin === "exit") return;
+    const order_name = prompt("Order Name: ")
+    if (order_name === "exit") return;
+    const quantity = prompt("Quantity: ")
+    if (quantity === "exit") return;
+    
+    await insert_data.insert_order(client, order_id, fin, order_name, quantity);
 }
 
 async function viewRecordMenu(client){
