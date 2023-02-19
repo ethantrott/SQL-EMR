@@ -62,13 +62,60 @@ async function viewPatientMenu(client){
     const choice = prompt("> ");
     if (choice == "1"){
         console.log(await get_data.get_all_patients(client));
-        prompt("Press any key to continue.")
+        prompt("Press any key to continue.");
     } 
     else if (choice == "2") {
-
+        const mrn = prompt("MRN: ");
+        console.log(await get_data.get_patient_by_mrn(client, mrn));
+        prompt("Press any key to continue.");
     }
     else if (choice == "3") {
-        
+        const name = prompt("Name: ");
+        console.log(await get_data.get_patients_by_name(client, name));
+        prompt("Press any key to continue.");
+    }
+}
+
+async function viewInteractionMenu(client){
+    // clear console
+    process.stdout.write('\033c');
+
+    // get input and display correct submenu
+    console.log("SQL-EMR\nEthan Trott \n\nView Interaction Record\n\n1) View Interaction by FIN\n2) View Interactions by MRN\n3) View Interactions by Name\n\nAny other key to return");
+    const choice = prompt("> ");
+    if (choice == "1"){
+        const fin = prompt("FIN: ");
+        console.log(await get_data.get_interaction_by_fin(client, fin));
+        prompt("Press any key to continue.");
+    } 
+    else if (choice == "2") {
+        const mrn = prompt("MRN: ");
+        console.log(await get_data.get_interactions_by_mrn(client, mrn));
+        prompt("Press any key to continue.");
+    }
+    else if (choice == "3") {
+        const name = prompt("Name: ");
+        console.log(await get_data.get_interactions_by_name(client, name));
+        prompt("Press any key to continue.");
+    }
+}
+
+async function viewOrderMenu(client){
+    // clear console
+    process.stdout.write('\033c');
+
+    // get input and display correct submenu
+    console.log("SQL-EMR\nEthan Trott \n\nView Order Record\n\n1) View Orders by FIN\n2) View Order by Order Name\n\nAny other key to return");
+    const choice = prompt("> ");
+    if (choice == "1"){
+        const fin = prompt("FIN: ");
+        console.log(await get_data.get_orders_by_fin(client, fin));
+        prompt("Press any key to continue.");
+    } 
+    else if (choice == "2") {
+        const name = prompt("Order Name: ");
+        console.log(await get_data.get_orders_by_order_name(client, name));
+        prompt("Press any key to continue.");
     }
 }
 
